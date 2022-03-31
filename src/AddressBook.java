@@ -1,42 +1,58 @@
-import java.util.Dictionary;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
 
 public class AddressBook {
     HashMap<String, Object> contactDetailsList = new HashMap<>();
-    public void addContactDetails(){
+
+    public List readContactDetail(boolean isEdit) {
+        List<String> list = new ArrayList<>();
         System.out.println("Enter Contact Details");
         System.out.println("----------------------");
         Scanner in = new Scanner(System.in);
-        System.out.print("Enter First Name: ");
-        String fName=in.next();
+        if (isEdit == false) {
+            System.out.print("Enter First Name: ");
+            list.add(in.next());
+        }
         System.out.print("Enter Last Name: ");
-        String lName=in.next();
+        list.add(in.next());
         System.out.print("Enter Address: ");
-        String address=in.next();
+        list.add(in.next());
         System.out.print("Enter City: ");
-        String city=in.next();
+        list.add(in.next());
         System.out.print("Enter State: ");
-        String state=in.next();
+        list.add(in.next());
         System.out.print("Enter Zip: ");
-        int zip=in.nextInt();
+        list.add(in.next());
         System.out.print("Enter Phone number: ");
-        String phone=in.next();
+        list.add(in.next());
         System.out.print("Enter Email Id: ");
-        String email=in.next();
+        list.add(in.next());
+        return list;
+    }
 
-        //initialize details using contractor
-        PersonContact newPersonContact = new PersonContact(fName, lName, address, city, state, zip, phone, email);
-        contactDetailsList.put(fName,newPersonContact);
+    public void addContactDetail() {
+        List listContactDetails = readContactDetail(false);
+        PersonContact objPersonContact = new PersonContact();
+        objPersonContact.addPersonContact(listContactDetails);
+        contactDetailsList.put((String) listContactDetails.get(0), objPersonContact);//add firstname and personContact object
+    }
+
+    public void editContactDetail(String firstName) {
+        if (contactDetailsList.containsKey(firstName)) {
+            PersonContact newPersonContact = (PersonContact) contactDetailsList.get(firstName);//get value(object) from hashmap and convert Person contact object
+            List editedPersonDetail = readContactDetail(true);//if true then it will not read first name
+            newPersonContact.editPersonContactDetails(editedPersonDetail);
+        } else {
+            System.out.println("First name doesn't exist");
+        }
     }
 
     //display contact details
-    public void displayContactDetails(){
-        for (String key: contactDetailsList.keySet()) {
-            PersonContact newPersonContact=(PersonContact) contactDetailsList.get(key);
+    public void displayContactDetails() {
+        for (String key : contactDetailsList.keySet()) {
+            PersonContact newPersonContact = (PersonContact) contactDetailsList.get(key);
             System.out.println("--------------------------");
             newPersonContact.displayPersonContactDetails();
+            System.out.println("--------------------------");
         }
-
     }
 }
