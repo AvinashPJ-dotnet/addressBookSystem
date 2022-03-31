@@ -19,7 +19,7 @@ public class PersonContact {
         this.zip=zip;
         this.phone=phone;
         this.email=email;
-        displayPersonContactDetails();
+//        displayPersonContactDetails();
     }
 
     public void displayPersonContactDetails(){
