@@ -27,6 +27,8 @@ public class Main {
                     String fNameDelete = input.next();
                     addressBook.deleteContactDetail(fNameDelete);
                     break;
+                case 0:
+                    break;
                 default:
                     System.out.println("Invalid input...");
             }
