@@ -143,8 +143,7 @@ public class AddressBook {
         }
         for (PersonDetails objPerson : listContactDetails) {
             if (objPerson.getFirstName().equals(firstName)) {
-                int indexFirstName = listContactDetails.indexOf(objPerson);
-                listContactDetails.remove(indexFirstName);
+                listContactDetails.remove(objPerson);
                 flag=true;
                 break;
             }
