@@ -1,61 +1,72 @@
 import java.util.*;
 
 public class AddressBook {
-    List<String> listFirstName = new ArrayList<>();
-    List<PersonContact> listContactDetails = new ArrayList<>();
+    List<PersonDetails> listContactDetails = new ArrayList<>();
 
     @SuppressWarnings("rawtypes")//warning should be suppressed using this suppressWarning annotation
-    public List readContactDetail() {
-        List<String> list = new ArrayList<>();
+    public PersonDetails readContactDetail() {
+        PersonDetails objPersonContact = new PersonDetails();
         System.out.println("Enter Contact Details");
         System.out.println("----------------------");
         Scanner in = new Scanner(System.in);
         System.out.print("Enter First Name: ");
-        list.add(in.next());
+        objPersonContact.setFirstName(in.next());
         System.out.print("Enter Last Name: ");
-        list.add(in.next());
+        objPersonContact.setLastName(in.next());
         System.out.print("Enter Address: ");
-        list.add(in.next());
+        objPersonContact.setAddress(in.next());
         System.out.print("Enter City: ");
-        list.add(in.next());
+        objPersonContact.setCity(in.next());
         System.out.print("Enter State: ");
-        list.add(in.next());
+        objPersonContact.setState(in.next());
         System.out.print("Enter Zip: ");
-        list.add(in.next());
+        objPersonContact.setZip(in.next());
         System.out.print("Enter Phone number: ");
-        list.add(in.next());
+        objPersonContact.setPhone(in.next());
         System.out.print("Enter Email Id: ");
-        list.add(in.next());
-        return list;
+        objPersonContact.setEmail(in.next());
+        return objPersonContact;
     }
 
     @SuppressWarnings("rawtypes")
     public void addContactDetail() {
-        List listReadContactDetails = readContactDetail();
-        if (!listFirstName.contains((String) listReadContactDetails.get(0)))//check whether the first name exist
-        {
-            PersonContact objPersonContact = new PersonContact();
-            objPersonContact.addOrEditPersonContact(listReadContactDetails);
-            listFirstName.add((String) listReadContactDetails.get(0));
-            listContactDetails.add(objPersonContact);
+        boolean flag = false;
+        PersonDetails personDetails = readContactDetail();
+        for (PersonDetails objPerson : listContactDetails) {
+            if (objPerson.getFirstName().equals(personDetails.getFirstName())) {
+                flag = true;
+            }
+        }
+        if (!flag) {
+            listContactDetails.add(personDetails);
         } else {
             System.out.println("First Name already exist..");
         }
-    }
+
+}
 
     public void editContactDetail(String firstName) {
-        if (listFirstName.isEmpty() || listContactDetails.isEmpty()) {
+        if (listContactDetails.isEmpty()) {
             System.out.println("------NO RECORDS------");
             return;
         }
-        if (listFirstName.contains(firstName)) {
+
+        boolean flag=false;
+        PersonDetails newPersonContact = null;
+        for (PersonDetails objPerson : listContactDetails) {
+            if (objPerson.getFirstName().equals(firstName)) {
+                newPersonContact = objPerson;
+                flag=true;
+                break;
+            }
+        }
+
+        if (flag) {
             int choice;
-            int indexFirstName = listFirstName.indexOf(firstName);
-            PersonContact newPersonContact = listContactDetails.get(indexFirstName);
             do {
                 System.out.println("---------------------------");
                 System.out.println("What you want to edit");
-                System.out.println("1. First Name\n2. Last Name\n3. Address\n4. City\n5. State\n6. Zip\n7. Phone Number\n8. Email Id\n9. All\n0. Cancel\n");
+                System.out.println("1. First Name\n2. Last Name\n3. Address\n4. City\n5. State\n6. Zip\n7. Phone Number\n8. Email Id\n0. Cancel\n");
                 System.out.print("Enter choice: ");
                 Scanner in = new Scanner(System.in);
                 choice = in.nextInt();
@@ -66,7 +77,6 @@ public class AddressBook {
                         System.out.print("New: ");
                         String newFirstName = in.next();
                         newPersonContact.setFirstName(newFirstName);
-                        listFirstName.set(indexFirstName, newFirstName);//change first name from list
                         break;
 
                     case 2:
@@ -111,11 +121,6 @@ public class AddressBook {
                         String newEmail = in.next();
                         newPersonContact.setEmail(newEmail);
                         break;
-                    case 9:
-                        List editedPersonDetail = readContactDetail();
-                        newPersonContact.addOrEditPersonContact(editedPersonDetail);
-                        listFirstName.set(indexFirstName, (String) editedPersonDetail.get(0));
-                        break;
                     case 0:
                         break;
                     default:
@@ -131,26 +136,34 @@ public class AddressBook {
     }
 
     public void deleteContactDetail(String firstName) {
-        if (listFirstName.isEmpty() || listContactDetails.isEmpty()) {
+        boolean flag=false;
+        if (listContactDetails.isEmpty()) {
             System.out.println("------NO RECORDS------");
             return;
         }
-        if (listFirstName.contains(firstName)) {
-            int indexFirstName = listFirstName.indexOf(firstName);
-            listContactDetails.remove(indexFirstName);
-            listFirstName.remove(indexFirstName);
-        } else {
+        for (PersonDetails objPerson : listContactDetails) {
+            if (objPerson.getFirstName().equals(firstName)) {
+                int indexFirstName = listContactDetails.indexOf(objPerson);
+                listContactDetails.remove(indexFirstName);
+                flag=true;
+                break;
+            }
+        }
+        if(flag){
+            System.out.println("Record Deleted..");
+        }else {
             System.out.println("First name doesn't exist");
         }
     }
 
     //display contact details
     public void displayContactDetails() {
-        if (listFirstName.isEmpty() || listContactDetails.isEmpty()) {//check list are empty or not
+        if (listContactDetails.isEmpty()) {//check list are empty or not
             System.out.println("------NO RECORDS------");
             return;
         }
-        for (PersonContact objPerson : listContactDetails) {
+
+        for (PersonDetails objPerson : listContactDetails) {
             System.out.println("--------------------------");
             objPerson.displayPersonContactDetails();
             System.out.println("--------------------------");
