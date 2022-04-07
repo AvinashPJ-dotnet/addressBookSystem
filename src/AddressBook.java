@@ -3,7 +3,6 @@ import java.util.*;
 public class AddressBook {
     List<PersonDetails> listContactDetails = new ArrayList<>();
 
-    @SuppressWarnings("rawtypes")//warning should be suppressed using this suppressWarning annotation
     public PersonDetails readContactDetail() {
         PersonDetails objPersonContact = new PersonDetails();
         System.out.println("Enter Contact Details");
@@ -28,7 +27,6 @@ public class AddressBook {
         return objPersonContact;
     }
 
-    @SuppressWarnings("rawtypes")
     public void addContactDetail() {
         boolean flag = false;
         PersonDetails personDetails = readContactDetail();
@@ -42,8 +40,7 @@ public class AddressBook {
         } else {
             System.out.println("First Name already exist..");
         }
-
-}
+    }
 
     public void editContactDetail(String firstName) {
         if (listContactDetails.isEmpty()) {
@@ -51,12 +48,12 @@ public class AddressBook {
             return;
         }
 
-        boolean flag=false;
+        boolean flag = false;
         PersonDetails newPersonContact = null;
         for (PersonDetails objPerson : listContactDetails) {
             if (objPerson.getFirstName().equals(firstName)) {
                 newPersonContact = objPerson;
-                flag=true;
+                flag = true;
                 break;
             }
         }
@@ -136,7 +133,7 @@ public class AddressBook {
     }
 
     public void deleteContactDetail(String firstName) {
-        boolean flag=false;
+        boolean flag = false;
         if (listContactDetails.isEmpty()) {
             System.out.println("------NO RECORDS------");
             return;
@@ -144,13 +141,13 @@ public class AddressBook {
         for (PersonDetails objPerson : listContactDetails) {
             if (objPerson.getFirstName().equals(firstName)) {
                 listContactDetails.remove(objPerson);
-                flag=true;
+                flag = true;
                 break;
             }
         }
-        if(flag){
+        if (flag) {
             System.out.println("Record Deleted..");
-        }else {
+        } else {
             System.out.println("First name doesn't exist");
         }
     }

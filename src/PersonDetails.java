@@ -73,6 +73,7 @@ public class PersonDetails {
         this.email = email;
     }
 
+
     public void displayPersonContactDetails() {
         System.out.println("First Name: " + firstName + "\nLast Name: " + lastName + "\nAddress: " + address + "\nCity: " + city + "\nState: " + state + "\nZip: " + zip + "\nPhone Number: " + phone + "\nEmail Id: " + email);
     }
