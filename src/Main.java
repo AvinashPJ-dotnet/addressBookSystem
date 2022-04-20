@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Main {
     static Scanner input = new Scanner(System.in);
-    static Dictionary<String, AddressBook> dictAddressBook = new Hashtable<>();
+    static HashMap<String, AddressBook> dictAddressBook = new HashMap<>();
 
     public static String inputString(String message) {
         System.out.println(message);
@@ -20,16 +20,16 @@ public class Main {
     }
 
     public static void displayBooks() {
-        Enumeration<String> key = dictAddressBook.keys();
-        while (key.hasMoreElements()) {
-            System.out.println(key.nextElement());
+        for (String books : dictAddressBook.keySet()) {
+            System.out.println(books);
         }
     }
+
     public static void displayNames(AddressBook addressBook) {
         System.out.print("First Names: ");
-        for (PersonDetails objPerson: addressBook.listContactDetails
-             ) {
-            System.out.print(objPerson.getFirstName()+", ");
+        for (PersonDetails objPerson : addressBook.listContactDetails
+        ) {
+            System.out.print(objPerson.getFirstName() + ", ");
         }
         System.out.println();
     }
@@ -67,20 +67,20 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        char ch;
+        int ch;
         System.out.println("Welcome to Address Book");
         do {
             String bookName = "";
             AddressBook addressBook = new AddressBook();
-            ch = inputChar("Want Create new book(Y/N)(X to Close)");
+            ch = inputInteger("1. Create New book\n2. Edit Existing book\n3. Edit Global Contact\n(0 to Close)");
             switch (ch) {
-                case 'Y':
+                case 1:
                     bookName = inputString("Enter New Address Book Name: ");
                     dictAddressBook.put(bookName, addressBook);
                     userOperation(bookName, addressBook);
                     break;
 
-                case 'N':
+                case 2:
                     if (!dictAddressBook.isEmpty()) {
                         displayBooks();
                         bookName = inputString("Enter Address Book Name to Access: ");
@@ -90,7 +90,35 @@ public class Main {
                         System.out.println("No Address Books are present");
                     }
                     break;
+                case 3:
+                    if (!dictAddressBook.isEmpty()) {
+                        String personName = inputString("Enter Person Name to edit: ");
+                        editGlobalContact(personName);
+                    } else {
+                        System.out.println("No Address Books are present");
+                    }
+                    break;
             }
-        } while (ch != 'X');
+        } while (ch != 0);
+    }
+
+    public static void editGlobalContact(String personName) {
+        boolean flag = false;
+        for (AddressBook addressBook : dictAddressBook.values()) {
+            for (PersonDetails listContactDetail : addressBook.listContactDetails
+            ) {
+                if (listContactDetail.getFirstName().equals(personName)) {
+                    flag = true;
+                    break;
+                }
+            }
+            if (flag) {
+                addressBook.editContactDetail(personName);
+                break;
+            }
+        }
     }
 }
+
+
+

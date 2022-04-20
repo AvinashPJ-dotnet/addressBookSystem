@@ -27,6 +27,7 @@ public class AddressBook {
         return objPersonContact;
     }
 
+    //check the person already exit or not
     public void addContactDetail() {
         boolean flag = false;
         PersonDetails personDetails = readContactDetail();
