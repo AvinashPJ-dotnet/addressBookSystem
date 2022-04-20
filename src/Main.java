@@ -98,6 +98,12 @@ public class Main {
                         System.out.println("No Address Books are present");
                     }
                     break;
+                case 4:
+                    searchPersonCity();
+                    break;
+                case 5:
+                    searchPersonState();
+                    break;
             }
         } while (ch != 0);
     }
@@ -117,6 +123,18 @@ public class Main {
                 break;
             }
         }
+    }
+
+    public static void searchPersonCity() {
+        System.out.println("Enter City name");
+        String city = input.next();
+        dictAddressBook.values().forEach(book -> book.listContactDetails.stream().filter(person -> person.getCity().equalsIgnoreCase(city)).forEach(System.out::println));
+    }
+
+    public static void searchPersonState() {
+        System.out.println("Enter State name");
+        String state = input.next();
+        dictAddressBook.values().forEach(book -> book.listContactDetails.stream().filter(person -> person.getState().equalsIgnoreCase(state)).forEach(System.out::println));
     }
 }
 
