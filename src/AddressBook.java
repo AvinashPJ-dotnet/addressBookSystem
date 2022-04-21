@@ -3,6 +3,7 @@ import java.util.*;
 public class AddressBook {
     List<PersonDetails> listContactDetails = new ArrayList<>();
 
+
     public PersonDetails readContactDetail() {
         PersonDetails objPersonContact = new PersonDetails();
         System.out.println("Enter Contact Details");
@@ -38,9 +39,43 @@ public class AddressBook {
         }
         if (!flag) {
             listContactDetails.add(personDetails);
+            storePersonByCity(personDetails.getCity(), personDetails);//call store person details by city name
+            storePersonByState(personDetails.getState(), personDetails);//call store person details by state name
         } else {
             System.out.println("First Name already exist..");
         }
+    }
+
+    //store persons detail in dict by city name
+    @SuppressWarnings("unchecked")
+    public void storePersonByCity(String cityName, PersonDetails personObject) {
+        while (Main.dictCity.keys().hasMoreElements()) {
+            if (Main.dictCity.keys().nextElement().equals(cityName)) {
+                ArrayList<PersonDetails> personDetailsArray = (ArrayList<PersonDetails>) Main.dictCity.get(cityName);
+                personDetailsArray.add(personObject);
+                Main.dictCity.put(cityName, personDetailsArray);
+                return;
+            } else break;
+        }
+        ArrayList<PersonDetails> personDetailsArray = new ArrayList<>();
+        personDetailsArray.add(personObject);
+        Main.dictCity.put(cityName, personDetailsArray);
+    }
+
+    //store persons detail in dict by state name
+    @SuppressWarnings("unchecked")
+    public void storePersonByState(String stateName, PersonDetails personObject) {
+        while (Main.dictState.keys().hasMoreElements()) {
+            if (Main.dictState.keys().nextElement().equals(stateName)) {
+                ArrayList<PersonDetails> personDetailsArray = (ArrayList<PersonDetails>) Main.dictState.get(stateName);
+                personDetailsArray.add(personObject);
+                Main.dictState.put(stateName, personDetailsArray);
+                return;
+            } else break;
+        }
+        ArrayList<PersonDetails> personDetailsArray = new ArrayList<>();
+        personDetailsArray.add(personObject);
+        Main.dictState.put(stateName, personDetailsArray);
     }
 
     public void editContactDetail(String firstName) {

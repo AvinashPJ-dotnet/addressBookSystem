@@ -1,8 +1,17 @@
+import com.sun.applet2.AppletParameters;
+
 import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Main {
     static Scanner input = new Scanner(System.in);
-    static HashMap<String, AddressBook> dictAddressBook = new HashMap<>();
+    AddressBook ab = new AddressBook();
+    static HashMap<String, AddressBook> dictAddressBook = new HashMap<>();//
+    static Dictionary dictCity = new Hashtable<String, ArrayList<PersonDetails>>();
+    static Dictionary dictState = new Hashtable<String, ArrayList<PersonDetails>>();
 
     public static String inputString(String message) {
         System.out.println(message);
@@ -72,7 +81,8 @@ public class Main {
         do {
             String bookName = "";
             AddressBook addressBook = new AddressBook();
-            ch = inputInteger("1. Create New book\n2. Edit Existing book\n3. Edit Global Contact\n(0 to Close)");
+            ch = inputInteger("1. Create New book\n2. Edit Existing book\n" +
+                    "3. Edit Global Contact\n4. search by city \n5. search by state\n6.view by city\n7.view by State\n(0 to Close)");
             switch (ch) {
                 case 1:
                     bookName = inputString("Enter New Address Book Name: ");
@@ -104,6 +114,17 @@ public class Main {
                 case 5:
                     searchPersonState();
                     break;
+                case 6:
+                    System.out.println("Enter City name");
+                    String city = input.next();
+                    viewPersonCity(city);
+                    break;
+                case 7:
+                    System.out.println("Enter State name");
+                    String state = input.next();
+                    viewPersonState(state);
+                    break;
+
             }
         } while (ch != 0);
     }
@@ -135,6 +156,17 @@ public class Main {
         System.out.println("Enter State name");
         String state = input.next();
         dictAddressBook.values().forEach(book -> book.listContactDetails.stream().filter(person -> person.getState().equalsIgnoreCase(state)).forEach(System.out::println));
+
+    }
+
+    public static void viewPersonCity(String city) {
+        ArrayList<PersonDetails> personDetails = (ArrayList<PersonDetails>) dictCity.get(city);
+        personDetails.stream().forEach(System.out::println);
+    }
+
+    public static void viewPersonState(String state) {
+        ArrayList<PersonDetails> personDetails = (ArrayList<PersonDetails>) dictState.get(state);
+        personDetails.stream().forEach(System.out::println);
     }
 }
 
