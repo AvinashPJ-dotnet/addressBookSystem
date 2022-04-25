@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class AddressBook {
-    List<PersonDetails> listContactDetails = new ArrayList<>();
+    ArrayList<PersonDetails> listContactDetails = new ArrayList<>();
 
 
     public PersonDetails readContactDetail() {
@@ -39,8 +39,8 @@ public class AddressBook {
         }
         if (!flag) {
             listContactDetails.add(personDetails);
-            storePersonByCity(personDetails.getCity(), personDetails);//call store person details by city name
-            storePersonByState(personDetails.getState(), personDetails);//call store person details by state name
+            storePersonByCity((String) personDetails.getCity(), personDetails);//call store person details by city name
+            storePersonByState((String) personDetails.getState(), personDetails);//call store person details by state name
         } else {
             System.out.println("First Name already exist..");
         }
@@ -194,7 +194,7 @@ public class AddressBook {
             System.out.println("------NO RECORDS------");
             return;
         }
-
+        Collections.sort(listContactDetails, new SortbyName());
         for (PersonDetails objPerson : listContactDetails) {
             System.out.println("--------------------------");
             objPerson.displayPersonContactDetails();

@@ -1,75 +1,77 @@
-public class PersonDetails {
-    private String firstName;
-    private String lastName;
-    private String address;
-    private String city;
-    private String state;
-    private String email;
-    private String zip;
-    private String phone;
+import java.util.Comparator;
+
+public class PersonDetails<T extends Comparable<T>> {
+    private T firstName;
+    private T lastName;
+    private T address;
+    private T city;
+    private T state;
+    private T email;
+    private T zip;
+    private T phone;
 
 
-    public String getFirstName() {
+    public T getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
+    public void setFirstName(T firstName) {
         this.firstName = firstName;
     }
 
-    public String getLastName() {
+    public T getLastName() {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
+    public void setLastName(T lastName) {
         this.lastName = lastName;
     }
 
-    public String getAddress() {
+    public T getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(T address) {
         this.address = address;
     }
 
-    public String getCity() {
+    public T getCity() {
         return city;
     }
 
-    public void setCity(String city) {
+    public void setCity(T city) {
         this.city = city;
     }
 
-    public String getState() {
+    public T getState() {
         return state;
     }
 
-    public void setState(String state) {
+    public void setState(T state) {
         this.state = state;
     }
 
-    public String getZip() {
+    public T getZip() {
         return zip;
     }
 
-    public void setZip(String zip) {
+    public void setZip(T zip) {
         this.zip = zip;
     }
 
-    public String getPhone() {
+    public T getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(T phone) {
         this.phone = phone;
     }
 
-    public String getEmail() {
+    public T getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(T email) {
         this.email = email;
     }
 
@@ -90,5 +92,14 @@ public class PersonDetails {
                 ", zip='" + zip + '\'' +
                 ", phone='" + phone + '\'' +
                 '}';
+    }
+}
+
+
+class SortbyName implements Comparator<PersonDetails> {
+
+    @Override
+    public int compare(PersonDetails o1, PersonDetails o2) {
+        return o1.getFirstName().compareTo(o2.getFirstName());
     }
 }

@@ -75,7 +75,7 @@ public class Main {
         } while (choice != 0);
     }
 
-    public static void main(String[] args) {
+    static public void main(String[] args) {
         int ch;
         System.out.println("Welcome to Address Book");
         do {
@@ -159,24 +159,24 @@ public class Main {
     public static void searchPersonCity() {
         System.out.println("Enter City name");
         String city = input.next();
-        dictAddressBook.values().forEach(book -> book.listContactDetails.stream().filter(person -> person.getCity().equalsIgnoreCase(city)).forEach(System.out::println));
+        dictAddressBook.values().forEach(book -> book.listContactDetails.stream().filter(person -> person.getCity().equals(city.toLowerCase())).forEach(System.out::println));
     }
 
     public static void searchPersonState() {
         System.out.println("Enter State name");
         String state = input.next();
-        dictAddressBook.values().forEach(book -> book.listContactDetails.stream().filter(person -> person.getState().equalsIgnoreCase(state)).forEach(System.out::println));
+        dictAddressBook.values().forEach(book -> book.listContactDetails.stream().filter(person -> person.getState().equals(state.toLowerCase())).forEach(System.out::println));
 
     }
 
     public static void viewPersonCity(String city) {
         ArrayList<PersonDetails> personDetails = (ArrayList<PersonDetails>) dictCity.get(city);
-        personDetails.stream().forEach(System.out::println);
+        personDetails.forEach(System.out::println);
     }
 
     public static void viewPersonState(String state) {
         ArrayList<PersonDetails> personDetails = (ArrayList<PersonDetails>) dictState.get(state);
-        personDetails.stream().forEach(System.out::println);
+        personDetails.forEach(System.out::println);
     }
 
     public static void countPersonByCity(String city) {
