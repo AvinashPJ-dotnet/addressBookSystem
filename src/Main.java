@@ -170,25 +170,42 @@ public class Main {
     }
 
     public static void viewPersonCity(String city) {
-        ArrayList<PersonDetails> personDetails = (ArrayList<PersonDetails>) dictCity.get(city);
-        personDetails.forEach(System.out::println);
+        try {
+            ArrayList<PersonDetails> personDetails = (ArrayList<PersonDetails>) dictCity.get(city);
+            personDetails.forEach(System.out::println);
+        } catch (NullPointerException ne) {
+            System.out.println("--------No Record Found---------");
+        }
     }
 
     public static void viewPersonState(String state) {
-        ArrayList<PersonDetails> personDetails = (ArrayList<PersonDetails>) dictState.get(state);
-        personDetails.forEach(System.out::println);
+        try {
+            ArrayList<PersonDetails> personDetails = (ArrayList<PersonDetails>) dictState.get(state);
+            personDetails.forEach(System.out::println);
+        } catch (NullPointerException ne) {
+            System.out.println("--------No Record Found---------");
+        }
+
     }
 
     public static void countPersonByCity(String city) {
-        ArrayList<PersonDetails> personDetails = (ArrayList<PersonDetails>) dictCity.get(city);
-        int count = (int) personDetails.stream().count();
-        System.out.println("city: " + city + " are " + count);
+        try {
+            ArrayList<PersonDetails> personDetails = (ArrayList<PersonDetails>) dictCity.get(city);
+            int count = (int) personDetails.stream().count();
+            System.out.println("city: " + city + " are " + count);
+        } catch (NullPointerException ne) {
+            System.out.println("--------No Record Found---------");
+        }
     }
 
     public static void countPersonByState(String state) {
-        ArrayList<PersonDetails> personDetails = (ArrayList<PersonDetails>) dictCity.get(state);
-        int count = (int) personDetails.stream().count();
-        System.out.println("city: " + state + " are " + count);
+        try {
+            ArrayList<PersonDetails> personDetails = (ArrayList<PersonDetails>) dictState.get(state);
+            int count = (int) personDetails.stream().count();
+            System.out.println("city: " + state + " total record found: " + count);
+        } catch (NullPointerException ne) {
+            System.out.println("--------No Record Found---------");
+        }
     }
 }
 

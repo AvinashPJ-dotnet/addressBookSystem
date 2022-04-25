@@ -2,13 +2,13 @@ import java.util.*;
 
 public class AddressBook {
     ArrayList<PersonDetails> listContactDetails = new ArrayList<>();
+    Scanner in = new Scanner(System.in);
 
 
     public PersonDetails readContactDetail() {
         PersonDetails objPersonContact = new PersonDetails();
         System.out.println("Enter Contact Details");
         System.out.println("----------------------");
-        Scanner in = new Scanner(System.in);
         System.out.print("Enter First Name: ");
         objPersonContact.setFirstName(in.next());
         System.out.print("Enter Last Name: ");
@@ -194,7 +194,24 @@ public class AddressBook {
             System.out.println("------NO RECORDS------");
             return;
         }
-        Collections.sort(listContactDetails, new SortbyName());
+        System.out.println("do want to sort contacts on specific details");
+        System.out.println("1. Name \t 2. City \t 3. State \t 4. Zip");
+        int ch = in.nextInt();
+        switch (ch) {
+            case 2:
+                listContactDetails.sort(new SortByCity());//used collection library for sort
+                break;
+            case 3:
+                listContactDetails.sort(new SortByState());//used collection library for sort
+                break;
+            case 4:
+                listContactDetails.sort(new SortByZip());//used collection library for sort
+                break;
+            default:
+                listContactDetails.sort(new SortByName());//used collection library for sort
+                break;
+        }
+
         for (PersonDetails objPerson : listContactDetails) {
             System.out.println("--------------------------");
             objPerson.displayPersonContactDetails();
