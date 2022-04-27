@@ -10,8 +10,8 @@ public class Main {
     static Scanner input = new Scanner(System.in);
     AddressBook ab = new AddressBook();
     static HashMap<String, AddressBook> dictAddressBook = new HashMap<>();//
-    static Dictionary dictCity = new Hashtable<String, ArrayList<PersonDetails>>();
-    static Dictionary dictState = new Hashtable<String, ArrayList<PersonDetails>>();
+    static Map dictCity = new HashMap<String, ArrayList<PersonDetails>>();
+    static Map dictState = new HashMap<String, ArrayList<PersonDetails>>();
 
     public static String inputString(String message) {
         System.out.println(message);
@@ -191,7 +191,7 @@ public class Main {
     public static void countPersonByCity(String city) {
         try {
             ArrayList<PersonDetails> personDetails = (ArrayList<PersonDetails>) dictCity.get(city);
-            int count = (int) personDetails.stream().count();
+            long count = personDetails.stream().count();
             System.out.println("city: " + city + " are " + count);
         } catch (NullPointerException ne) {
             System.out.println("--------No Record Found---------");
@@ -201,7 +201,7 @@ public class Main {
     public static void countPersonByState(String state) {
         try {
             ArrayList<PersonDetails> personDetails = (ArrayList<PersonDetails>) dictState.get(state);
-            int count = (int) personDetails.stream().count();
+            long count = personDetails.stream().count();
             System.out.println("city: " + state + " total record found: " + count);
         } catch (NullPointerException ne) {
             System.out.println("--------No Record Found---------");

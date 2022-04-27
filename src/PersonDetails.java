@@ -94,36 +94,3 @@ public class PersonDetails<T extends Comparable<T>> {
                 '}';
     }
 }
-
-
-class SortByName implements Comparator<PersonDetails> {
-
-    @Override
-    public int compare(PersonDetails o1, PersonDetails o2) {
-        return o1.getFirstName().compareTo(o2.getFirstName());
-    }
-}
-
-class SortByCity implements Comparator<PersonDetails> {
-
-    @Override
-    public int compare(PersonDetails o1, PersonDetails o2) {
-        return o1.getCity().compareTo(o2.getCity());
-    }
-}
-
-class SortByState implements Comparator<PersonDetails> {
-
-    @Override
-    public int compare(PersonDetails o1, PersonDetails o2) {
-        return o1.getState().compareTo(o2.getState());
-    }
-}
-
-class SortByZip implements Comparator<PersonDetails> {
-
-    @Override
-    public int compare(PersonDetails o1, PersonDetails o2) {
-        return o1.getZip().compareTo(o2.getZip());
-    }
-}
