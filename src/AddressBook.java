@@ -3,7 +3,7 @@ import java.util.*;
 public class AddressBook {
     ArrayList<PersonDetails> listContactDetails = new ArrayList<>();
     Scanner in = new Scanner(System.in);
-    PersonDetails objPersonContact=null;
+    PersonDetails objPersonContact = null;
 
 
     public PersonDetails readContactDetail() {
@@ -36,10 +36,13 @@ public class AddressBook {
         for (PersonDetails objPerson : listContactDetails) {
             if (objPerson.getFirstName().equals(personDetails.getFirstName())) {
                 flag = true;
+                break;
             }
         }
         if (!flag) {
             listContactDetails.add(personDetails);
+            AddressBookFileIOService addressBookFileIOService = new AddressBookFileIOService();
+            addressBookFileIOService.write(listContactDetails);//write person data into file
             storePersonByCity((String) personDetails.getCity(), personDetails);//call store person details by city name
             storePersonByState((String) personDetails.getState(), personDetails);//call store person details by state name
         } else {

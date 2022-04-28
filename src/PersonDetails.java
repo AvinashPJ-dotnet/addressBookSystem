@@ -82,15 +82,13 @@ public class PersonDetails<T extends Comparable<T>> {
 
     @Override
     public String toString() {
-        return "PersonDetails{" +
-                "firstName='" + firstName + '\'' +
+        return  "[firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", address='" + address + '\'' +
                 ", city='" + city + '\'' +
                 ", state='" + state + '\'' +
                 ", email='" + email + '\'' +
                 ", zip='" + zip + '\'' +
-                ", phone='" + phone + '\'' +
-                '}';
+                ", phone='" + phone + '\''+"]";
     }
 }
