@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.*;
 
 public class AddressBook {
@@ -30,7 +31,7 @@ public class AddressBook {
     }
 
     //check the person already exit or not
-    public void addContactDetail() {
+    public void addContactDetail() throws IOException {
         boolean flag = false;
         PersonDetails personDetails = readContactDetail();
         for (PersonDetails objPerson : listContactDetails) {
@@ -43,6 +44,8 @@ public class AddressBook {
             listContactDetails.add(personDetails);
             AddressBookFileIOService addressBookFileIOService = new AddressBookFileIOService();
             addressBookFileIOService.write(listContactDetails);//write person data into file
+            OpenCsvWriter openCsvWriter = new OpenCsvWriter();
+            openCsvWriter.writeToCSV(listContactDetails);
             storePersonByCity((String) personDetails.getCity(), personDetails);//call store person details by city name
             storePersonByState((String) personDetails.getState(), personDetails);//call store person details by state name
         } else {

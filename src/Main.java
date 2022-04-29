@@ -1,10 +1,5 @@
-import com.sun.applet2.AppletParameters;
-
+import java.io.IOException;
 import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Main {
     static Scanner input = new Scanner(System.in);
@@ -43,7 +38,7 @@ public class Main {
         System.out.println();
     }
 
-    public static void userOperation(String bookName, AddressBook addressBook) {
+    public static void userOperation(String bookName, AddressBook addressBook) throws IOException {
         int choice = 0;
         do {
             System.out.println("--------------------------");
@@ -75,7 +70,7 @@ public class Main {
         } while (choice != 0);
     }
 
-    static public void main(String[] args) {
+    static public void main(String[] args) throws IOException {
         int ch;
         System.out.println("Welcome to Address Book");
         do {
@@ -185,7 +180,6 @@ public class Main {
         } catch (NullPointerException ne) {
             System.out.println("--------No Record Found---------");
         }
-
     }
 
     public static void countPersonByCity(String city) {
