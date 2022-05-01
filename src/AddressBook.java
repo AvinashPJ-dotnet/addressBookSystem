@@ -44,8 +44,9 @@ public class AddressBook {
             listContactDetails.add(personDetails);
             AddressBookFileIOService addressBookFileIOService = new AddressBookFileIOService();
             addressBookFileIOService.write(listContactDetails);//write person data into file
-            OpenCsvWriter openCsvWriter = new OpenCsvWriter();
+            OpenCsvAndGsonWriter openCsvWriter = new OpenCsvAndGsonWriter();
             openCsvWriter.writeToCSV(listContactDetails);
+            openCsvWriter.writeToJson(listContactDetails);
             storePersonByCity((String) personDetails.getCity(), personDetails);//call store person details by city name
             storePersonByState((String) personDetails.getState(), personDetails);//call store person details by state name
         } else {

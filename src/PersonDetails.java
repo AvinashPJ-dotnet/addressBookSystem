@@ -1,4 +1,4 @@
-import java.util.Comparator;
+import com.google.gson.JsonElement;
 
 public class PersonDetails<T extends Comparable<T>> {
     private T firstName;
